@@ -1,0 +1,14 @@
+<div style="max-width: 400px;margin: auto; text-align: center;">
+  <img src="https://admin.examplenterprise.com/static/frontend/logo.jpg" width="40" height="40" />
+  <h2 style="color: #9575CD;">
+    Cuenta configurada satisfactoriamente
+  </h2>
+  <p style="text-align: justify;background-color: #9575cd0f; padding:20px;color: rgba(0, 0, 0, 0.6);">
+    Su cuenta ha sido configurada correctamente por nuestro equipo por 
+    lo que puede proceder a activarla.
+    <br>
+    <br>
+    Para ello, basta con hacer click en este 
+    <a href="{{ base_url }}{% url 'user_core:activate' uidb64 token  %}" target="_blank">enlace</a>
+  </p>
+</div>
