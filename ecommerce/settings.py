@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'user_core.apps.UserCoreConfig',
-    'enterprise.apps.EnterpriseConfig'
+    'enterprise.apps.EnterpriseConfig',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -151,7 +152,14 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ]
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Ecommerce API',
+    'DESCRIPTION': 'Very simple ecommerce api',
+    'VERSION': '1.0.0',
 }
 
 # Email
