@@ -1,6 +1,6 @@
 from django.db.models import fields
 from rest_framework import serializers
-from .models import Enterprise, CustomUser
+from .models import Category, Enterprise, CustomUser, SubCategory
 from user_core.serializers import CustomUserSerializer
 import logging
 logger = logging.getLogger("mfc")
@@ -15,3 +15,13 @@ class EnterpriseSerializer(serializers.ModelSerializer):
   class Meta:
     model = Enterprise
     exclude = ["followers","likes"]
+
+class CategorySerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Category
+    fields = '__all__'
+
+class SubCategorySerializer(serializers.ModelSerializer):
+  class Meta:
+    model = SubCategory
+    fields = '__all__'

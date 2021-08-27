@@ -33,3 +33,23 @@ class Enterprise(models.Model):
 
   def likes_count(self):
     return self.likes.count()
+
+class Category(models.Model):
+  name = models.CharField(max_length=30)
+
+  def __str__(self):
+    return self.name
+
+  class Meta:
+    verbose_name_plural='Categories'
+
+class SubCategory(models.Model):
+  name = models.CharField(max_length=24)
+  category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.name  
+
+  class Meta:
+    verbose_name_plural='Sub Categories'
+

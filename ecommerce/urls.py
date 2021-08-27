@@ -22,6 +22,6 @@ urlpatterns = [
   path('api-auth/', include('rest_framework.urls')),
   path('api/', include('enterprise.urls')),
   path('api/', include('user_core.urls')),
-  path('api/schema/', SpectacularAPIView.as_view(), name='schema'), # Downloads schema
+  path('api/schema/', SpectacularAPIView.as_view(api_version="v1"), name='schema'), # Downloads schema
   path('api/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 ]

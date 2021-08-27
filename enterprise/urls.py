@@ -10,5 +10,7 @@ router.register(r"enterprise", views.EnterpriseViewSet)
 app_name = "enterprise"
 
 urlpatterns = [
-  path("", include(router.urls))
+  path("", include(router.urls)),
+  path("categories/", views.CategoryListView.as_view()),
+  path("categories/<int:pk>/subcategories/", views.SubcategoryListView.as_view())
 ]
