@@ -1,6 +1,8 @@
 from django.db.models import fields
 from rest_framework import serializers
-from .models import Category, Enterprise, CustomUser, SubCategory
+
+import enterprise
+from .models import *
 from user_core.serializers import CustomUserSerializer
 import logging
 logger = logging.getLogger("mfc")
@@ -24,4 +26,22 @@ class CategorySerializer(serializers.ModelSerializer):
 class SubCategorySerializer(serializers.ModelSerializer):
   class Meta:
     model = SubCategory
+    fields = '__all__'
+
+class ProductSerializer(serializers.ModelSerializer):
+
+  def validate_enterprise(self, enterprise):
+    enterprise = Enterprise.objects.get(id=enterprise.id)
+    if enterprise.owner.pk != self.context['request'].user.pk:
+      raise serializers.ValidationError("Only the owner of an enterprise can add a product to it")
+    return enterprise
+  class Meta:
+    model = Product
+    fields = '__all__'
+
+class RatingSerializer(serializers.ModelSerializer):
+  user = CustomUserSerializer(read_only=True)
+  product = ProductSerializer(read_only=True)
+  class Meta:
+    model = Rating
     fields = '__all__'

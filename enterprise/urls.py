@@ -6,6 +6,8 @@ from . import views
 
 router = DefaultRouter()
 router.register(r"enterprise", views.EnterpriseViewSet)
+router.register(r"products", views.ProductViewSet)
+router.register(r"ratings", views.RatingViewSet)
 
 app_name = "enterprise"
 

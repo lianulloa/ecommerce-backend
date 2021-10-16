@@ -14,3 +14,13 @@ class CategoryAdmin(admin.ModelAdmin):
 class SubCategoryAdmin(admin.ModelAdmin):
   list_display = ('name', 'category')
   ordering = ('category', 'name')
+
+@admin.register(Rating)
+class RatingAdmin(admin.ModelAdmin):
+  list_display = ('value', 'user', 'product')
+  ordering = ('product', 'value')
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+  list_display = ('name', 'description', 'subcategory')
+  ordering = ('name',)
