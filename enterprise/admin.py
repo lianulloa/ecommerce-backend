@@ -5,3 +5,22 @@ from .models import *
 class Enterprise(admin.ModelAdmin):
   list_display = ("name", 'description', 'url')
   ordering = ('name',)
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+  ordering = ('name',)
+
+@admin.register(SubCategory)
+class SubCategoryAdmin(admin.ModelAdmin):
+  list_display = ('name', 'category')
+  ordering = ('category', 'name')
+
+@admin.register(Rating)
+class RatingAdmin(admin.ModelAdmin):
+  list_display = ('value', 'user', 'product')
+  ordering = ('product', 'value')
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+  list_display = ('name', 'description', 'subcategory')
+  ordering = ('name',)

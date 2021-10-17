@@ -13,13 +13,12 @@ class CustomUser(models.Model):
 
   class Meta:
     """Meta definition for CustomUser."""
-
     verbose_name = 'Info Adicional de usuario'
     verbose_name_plural = 'Info adicional de los usuarios'
 
   def __str__(self):
     """Unicode representation of CustomUser."""
-    return self.user.username
+    return f"CustomUser: {self.user.username}"
 
 
 # class AccountActivationToken(models.Model):

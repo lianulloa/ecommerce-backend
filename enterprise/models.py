@@ -33,3 +33,42 @@ class Enterprise(models.Model):
 
   def likes_count(self):
     return self.likes.count()
+
+class Category(models.Model):
+  name = models.CharField(max_length=30)
+
+  def __str__(self):
+    return self.name
+
+  class Meta:
+    verbose_name_plural='Categories'
+
+class SubCategory(models.Model):
+  name = models.CharField(max_length=24)
+  category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return self.name  
+
+  class Meta:
+    verbose_name_plural='Sub Categories'
+
+class Rating(models.Model):
+  user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
+  product = models.ForeignKey('Product', on_delete=models.CASCADE)
+  value = models.IntegerField()
+
+  def __str__(self):
+    return f'{self.user} gives {self.value}'
+class Product(models.Model):
+  name = models.CharField(max_length=100)
+  description = models.TextField()
+  subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+  enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
+  # ratings = models.ManyToManyField(Rating, blank=True)
+  # TODO: maybe use cloudinary to store pictures
+  # photo = models.CharField(max_length=100,default='images/Enterprise/default.png')
+  # photo_thumb = models.CharField(max_length=100,default='images/Enterprise/default.png')
+
+  def __str__(self):
+    return self.name
