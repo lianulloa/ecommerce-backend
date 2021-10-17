@@ -17,10 +17,10 @@ class SubCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Rating)
 class RatingAdmin(admin.ModelAdmin):
-  list_display = ('value', 'user', 'product')
-  ordering = ('product', 'value')
+  list_display = ('value', 'user', 'opinion')
+  ordering = ('value',)
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-  list_display = ('name', 'description', 'subcategory')
+  list_display = ('name', 'description', 'subcategory', 'price')
   ordering = ('name',)

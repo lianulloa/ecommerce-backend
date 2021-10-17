@@ -29,6 +29,7 @@ class SubCategorySerializer(serializers.ModelSerializer):
     fields = '__all__'
 
 class ProductSerializer(serializers.ModelSerializer):
+  price = serializers.DecimalField(max_digits=9,decimal_places=2,min_value=0.01)
 
   def validate_enterprise(self, enterprise):
     enterprise = Enterprise.objects.get(id=enterprise.id)
