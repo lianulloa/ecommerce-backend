@@ -162,6 +162,11 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
 }
 
+if DEBUG:
+    CORS_ORIGIN_ALLOW_ALL = False
+    CORS_ORIGIN_WHITELIST = ("http://localhost:3000","http://localhost:8000")
+    CORS_ALLOW_CREDENTIALS = True
+
 # Email
 ADMINS = [('CEO', os.getenv("MFC_CEO_EMAIL") ), ('CTO', os.getenv("MFC_CTO_EMAIL"))]
 EMAIL_HOST_USER = os.getenv("MFC_EMAIL_HOST_USER")
