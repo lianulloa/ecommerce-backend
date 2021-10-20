@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'user_core.apps.UserCoreConfig',
     'enterprise.apps.EnterpriseConfig',
     'drf_spectacular',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
