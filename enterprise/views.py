@@ -3,12 +3,13 @@ import logging
 
 from rest_framework import filters
 from rest_framework.exceptions import ValidationError
+from django_filters.rest_framework import DjangoFilterBackend
 
+
+from .filters import ProductFilter
 from .serializers import *
-from .decorators.views import withMetadata
 from .drf_custom.generics import ListAPIViewWithMetadata
 from .drf_custom.viewsets import ModelViewSetWithMetadata
-# from .models import *
 
 logger = logging.getLogger("mfc")
 class EnterpriseViewSet(ModelViewSetWithMetadata):
@@ -21,7 +22,8 @@ class EnterpriseViewSet(ModelViewSetWithMetadata):
 class ProductViewSet(ModelViewSetWithMetadata):
   queryset = Product.objects.all()
   serializer_class = ProductSerializer
-  filter_backends = [filters.SearchFilter]
+  filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+  filterset_class = ProductFilter
   search_fields = ['name', 'description']
 
   def perform_destroy(self, instance):
@@ -41,7 +43,6 @@ class CategoryListView(ListAPIViewWithMetadata):
   serializer_class = CategorySerializer
 
 class SubcategoryListView(ListAPIViewWithMetadata):
-  queryset = Category.objects.all()
   serializer_class = CategorySerializer
 
   def get_queryset(self):
