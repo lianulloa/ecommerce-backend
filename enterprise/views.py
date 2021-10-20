@@ -5,6 +5,7 @@ from rest_framework import viewsets, permissions, mixins, generics, filters
 from rest_framework.exceptions import ValidationError
 
 from .serializers import *
+from .decorators.views import withMetadata
 # from .models import *
 
 logger = logging.getLogger("mfc")
@@ -33,20 +34,12 @@ class RatingViewSet(viewsets.ModelViewSet):
   def perform_create(self, serializer):
     serializer.save(user=self.request.user.customuser)
 
-class CategoryListView(mixins.ListModelMixin, generics.GenericAPIView):
+class CategoryListView(generics.ListAPIView):
   queryset = Category.objects.all()
   serializer_class = CategorySerializer
 
+  @withMetadata
   def get(self, request, *args, **kwargs):
-    if self.request.query_params.get("metadata"):
-      response = self.list(request, *args, * kwargs)
-      response.data = {
-        'data': response.data,
-        'metadata': {
-          'total': self.get_queryset().count()
-        }
-      }
-      return response
     return self.list(request, *args, **kwargs)
 
 class SubcategoryListView(mixins.ListModelMixin, generics.GenericAPIView):
@@ -56,14 +49,6 @@ class SubcategoryListView(mixins.ListModelMixin, generics.GenericAPIView):
   def get_queryset(self):
     return Category.objects.get(id=self.kwargs['pk']).subcategory_set
 
+  @withMetadata
   def get(self, request, *args, **kwargs):
-    if self.request.query_params.get("metadata"):
-      response = self.list(request, *args, * kwargs)
-      response.data = {
-        'data': response.data,
-        'metadata': {
-          'total': self.get_queryset().count()
-        }
-      }
-      return response
     return self.list(request, *args, **kwargs)
