@@ -22,9 +22,11 @@ class EnterpriseViewSet(ModelViewSetWithMetadata):
 class ProductViewSet(ModelViewSetWithMetadata):
   queryset = Product.objects.all()
   serializer_class = ProductSerializer
-  filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+  filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
   filterset_class = ProductFilter
   search_fields = ['name', 'description']
+  ordering_fields = ['name','price', 'updated_at', 'created_at']
+  ordering = ['-updated_at', 'price']
 
   def perform_destroy(self, instance):
     if self.request.user.pk != instance.enterprise.owner.pk:

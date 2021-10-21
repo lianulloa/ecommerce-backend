@@ -67,6 +67,8 @@ class Product(models.Model):
   subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
   enterprise = models.ForeignKey(Enterprise, on_delete=models.CASCADE)
   price = models.DecimalField(max_digits=9,decimal_places=2)
+  created_at = models.DateField(auto_now_add=True)
+  updated_at = models.DateField(auto_now=True)
   # ratings = models.ManyToManyField(Rating, blank=True)
   # TODO: maybe use cloudinary to store pictures
   # photo = models.CharField(max_length=100,default='images/Enterprise/default.png')

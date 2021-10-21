@@ -22,5 +22,5 @@ class RatingAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-  list_display = ('name', 'description', 'subcategory', 'price')
-  ordering = ('name',)
+  list_display = ('name', 'description', 'subcategory', 'price', 'updated_at', 'created_at')
+  ordering = ('-updated_at', 'price')
